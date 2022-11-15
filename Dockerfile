@@ -4,12 +4,12 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
+RUN yarn install
 
-RUN npm run build
+RUN yarn build
 
 ENV PORT=8080
 
 EXPOSE 8080
 
-cmd [ "npm", "start" ]
+CMD yarn start:prod

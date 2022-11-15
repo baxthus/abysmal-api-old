@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
-    "build": "tsc && npm run copy-files",
+    "build": "tsc && yarn copy-files",
     "start:prod": "node dist/index.js",
     "pm2:prod": "pm2 start dist/index.js",
     "lint": "eslint .",
