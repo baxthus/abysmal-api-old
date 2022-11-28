@@ -1,14 +1,12 @@
-import express from 'express';
+import { Router } from 'express';
 import { E6 } from 'furry-wrapper';
-const router = express.Router();
+const router = Router();
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let response: any;
 let blob;
 
-router.get('/yiff2', (req, res) => {
-    res.redirect(301, '/');
-});
+router.get('/yiff2', (req, res) => res.redirect(301, '/'));
 
 router.get('/yiff2/:tags', async (req, res) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,9 +25,7 @@ router.get('/yiff2/:tags', async (req, res) => {
     }
 
     res.type(blob.type);
-    blob.arrayBuffer().then((buf) => {
-        res.send(Buffer.from(buf));
-    });
+    blob.arrayBuffer().then(buf => res.send(Buffer.from(buf)));
 });
 
 export = router;

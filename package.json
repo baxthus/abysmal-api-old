@@ -4,11 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts",
+    "start": "doppler run -- ts-node src/index.ts",
+    "dev": "doppler run -- nodemon src/index.ts",
     "build": "tsc && yarn copy-files",
-    "start:prod": "node dist/index.js",
-    "pm2:prod": "pm2 start dist/index.js",
+    "start:prod": "yarn build && doppler run -- node dist/index.js",
+    "pm2:prod": "yarn build && doppler run -- pm2 start dist/index.js",
     "lint": "eslint .",
     "copy-files": "cp -r ./src/public ./dist/"
   },

@@ -1,12 +1,10 @@
-import express from 'express';
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
 let response;
 let blob;
 
-router.get('/nsfw', (reqt, res) => {
-    res.redirect('/');
-});
+router.get('/nsfw', (req, res) => res.redirect('/'));
 
 router.get('/nsfw/:category', async (req, res) => {
     const { category } = req.params;
@@ -28,9 +26,7 @@ router.get('/nsfw/:category', async (req, res) => {
     }
 
     res.type(blob.type);
-    blob.arrayBuffer().then((buf) => {
-        res.send(Buffer.from(buf));
-    });
+    blob.arrayBuffer().then(buf => res.send(Buffer.from(buf)));
 });
 
 export = router;

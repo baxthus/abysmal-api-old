@@ -1,6 +1,6 @@
-import express from 'express';
+import { Router } from 'express';
 import yiffy from 'yiffy';
-const router = express.Router();
+const router = Router();
 const yiff = new yiffy();
 
 let response;
@@ -20,9 +20,7 @@ async function shitFunction(category: string) {
     return category_list[category];
 }
 
-router.get('/yiff', (req, res) => {
-    res.redirect('/');
-});
+router.get('/yiff', (req, res) => res.redirect('/'));
 
 router.get('/yiff/:category', async (req, res) => {
     const { category } = req.params;
@@ -44,9 +42,7 @@ router.get('/yiff/:category', async (req, res) => {
     }
 
     res.type(blob.type);
-    blob.arrayBuffer().then((buf) => {
-        res.send(Buffer.from(buf));
-    });
+    blob.arrayBuffer().then(buf => res.send(Buffer.from(buf)));
 });
 
 export = router;

@@ -1,6 +1,6 @@
-import express from 'express';
+import { Router } from 'express';
 import nekos from 'nekos.life';
-const router = express.Router();
+const router = Router();
 const neko = new nekos();
 
 let blob;
@@ -14,9 +14,7 @@ router.get('/neko', async (req, res) => {
     }
 
     res.type(blob.type);
-    blob.arrayBuffer().then((buf) => {
-        res.send(Buffer.from(buf));
-    });
+    blob.arrayBuffer().then(buf => res.send(Buffer.from(buf)));
 });
 
 export = router;

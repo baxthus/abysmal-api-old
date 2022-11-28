@@ -1,6 +1,6 @@
-import express from 'express';
+import { Router } from 'express';
 import catboys from 'catboys';
-const router = express.Router();
+const router = Router();
 const catboy = new catboys();
 
 let blob;
@@ -14,9 +14,7 @@ router.get('/catboy', async (req, res) => {
     }
 
     res.type(blob.type);
-    blob.arrayBuffer().then((buf) => {
-        res.send(Buffer.from(buf));
-    });
+    blob.arrayBuffer().then(buf => res.send(Buffer.from(buf)));
 });
 
 export = router;
