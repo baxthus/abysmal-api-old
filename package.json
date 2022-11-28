@@ -10,7 +10,8 @@
     "start:prod": "yarn build && doppler run -- node dist/index.js",
     "pm2:prod": "yarn build && doppler run -- pm2 start dist/index.js",
     "lint": "eslint .",
-    "copy-files": "cp -r ./src/public ./dist/"
+    "copy-files": "cp -r ./src/public ./dist/",
+    "docker:start": "node dist/index.js"
   },
   "author": "Abysmal",
   "license": "MIT",
