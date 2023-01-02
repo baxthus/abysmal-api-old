@@ -15,11 +15,6 @@ router.get('/nsfw/:category', async (req, res) => {
 
     try {
         response = await (await fetch(`https://api.waifu.pics/nsfw/${category.toLowerCase()}`)).json();
-    } catch {
-        return res.status(500).json({ message: 'Fail requesting image' });
-    }
-
-    try {
         blob = await (await fetch(response.url)).blob();
     } catch {
         return res.status(500).json({ message: 'Fail fetching image' });

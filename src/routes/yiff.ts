@@ -10,11 +10,11 @@ let blob;
 async function shitFunction(category: string) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const category_list: any = {
-        'straight': await yiff.furry.yiff.straight('json'),
-        'gay': await yiff.furry.yiff.gay('json'),
-        'lesbian': await yiff.furry.yiff.lesbian('json'),
-        'gynomorph': await yiff.furry.yiff.gynomorph('json'),
-        'andromorph': await yiff.furry.yiff.andromorph('json'),
+        'straight': await yiff.images.furry.yiff.straight(),
+        'gay': await yiff.images.furry.yiff.gay(),
+        'lesbian': await yiff.images.furry.yiff.lesbian(),
+        'gynomorph': await yiff.images.furry.yiff.gynomorph(),
+        'andromorph': await yiff.images.furry.yiff.andromorph(),
     };
 
     return category_list[category];
@@ -31,12 +31,7 @@ router.get('/yiff/:category', async (req, res) => {
 
     try {
         response = await shitFunction(category.toLowerCase());
-    } catch {
-        return res.status(500).json({ message: 'Fail requesting image' });
-    }
-
-    try {
-        blob = await (await fetch(response[0].url)).blob();
+        blob = await (await fetch(response.url)).blob();
     } catch {
         return res.status(500).json({ message: 'Fail fetching image' });
     }

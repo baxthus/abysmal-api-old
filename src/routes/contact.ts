@@ -4,6 +4,14 @@ const router = Router();
 const webhook = process.env.CONTACT_WEBHOOK ?? '';
 
 router.post('/contact', async (req, res) => {
+    if (!req.body.originURL ||
+        !req.body.inputName ||
+        !req.body.inputEmail ||
+        !req.body.inputMessage
+    ) {
+        return res.json({ success: false });
+    }
+
     const embed = {
         'title': 'Contact Form',
         'description': `From ${req.body.originURL}`,

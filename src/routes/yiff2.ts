@@ -14,12 +14,7 @@ router.get('/yiff2/:tags', async (req, res) => {
 
     try {
         response = await E6.nsfw(tags);
-    } catch {
-        return res.status(500).json({ message: 'Fail requesting image' });
-    }
-
-    try {
-        blob = await (await fetch((response).file.url)).blob();
+        blob = await (await fetch(response.file.url)).blob();
     } catch {
         return res.status(500).json({ message: 'Fail fetching image' });
     }
