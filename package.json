@@ -5,13 +5,11 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "doppler run -- ts-node src/index.ts",
-    "dev": "doppler run -- nodemon src/index.ts",
-    "build": "tsc && yarn copy-files",
+    "dev": "doppler run -- ts-node-dev src/index.ts",
+    "build": "tsc && cp -r src/public dist",
     "start:prod": "yarn build && doppler run -- node dist/index.js",
     "pm2:prod": "yarn build && doppler run -- pm2 start dist/index.js",
-    "lint": "eslint .",
-    "copy-files": "cp -r ./src/public ./dist/",
-    "docker:start": "node dist/index.js"
+    "lint": "eslint ."
   },
   "author": "Abysmal",
   "license": "MIT",
@@ -22,8 +20,8 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.42.1",
     "eslint": "^8.27.0",
-    "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
     "typescript": "*",
     "typescript-eslint": "^0.0.1-alpha.0"
   },
