@@ -8,8 +8,6 @@ RUN yarn install
 
 RUN yarn build
 
-ENV PORT=8080
-
-EXPOSE 8080
+EXPOSE 5000
 
 CMD ["node", "dist/index.js"]

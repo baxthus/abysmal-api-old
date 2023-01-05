@@ -5,7 +5,7 @@ let response;
 let blob;
 
 router.get('/loli', async (req, res) => {
-    // Returns a random integer from 0 to 100:
+    // Returns a random integer from 0 to 100
     const value = Math.floor(Math.random() * 101);
 
     try {
