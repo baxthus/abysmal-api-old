@@ -3,13 +3,13 @@ import catboys from 'catboys';
 const router = Router();
 const catboy = new catboys();
 
-let response;
-let blob;
+let blob: Blob;
 
 router.get('/catboy', async (req, res) => {
     try {
-        response = (await catboy.image()).url;
-        blob = await (await fetch(response)).blob();
+        await catboy.image().then(async response => {
+            blob = await (await fetch(response.url)).blob();
+        });
     } catch {
         return res.status(500).json({ message: 'Fail fetching image' });
     }

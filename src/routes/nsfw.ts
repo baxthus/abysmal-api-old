@@ -1,21 +1,23 @@
 import { Router } from 'express';
 const router = Router();
 
-let response;
-let blob;
+const waifuURL = 'https://api.waifu.pics/nsfw/';
+
+let blob: Blob;
 
 router.get('/nsfw', (req, res) => res.redirect('/'));
 
 router.get('/nsfw/:category', async (req, res) => {
-    const { category } = req.params;
+    const category = req.params.category.toLowerCase();
 
-    if (!['waifu', 'neko', 'trap', 'blowjob'].includes(category.toLowerCase())) {
+    if (!['waifu', 'neko', 'trap', 'blowjob'].includes(category)) {
         return res.redirect('/');
     }
 
     try {
-        response = await (await fetch(`https://api.waifu.pics/nsfw/${category.toLowerCase()}`)).json();
-        blob = await (await fetch(response.url)).blob();
+        await (await fetch(waifuURL + category)).json().then(async response => {
+            blob = await (await fetch(response.url)).blob();
+        });
     } catch {
         return res.status(500).json({ message: 'Fail fetching image' });
     }

@@ -3,13 +3,13 @@ import nekos from 'nekos.life';
 const router = Router();
 const neko = new nekos();
 
-let response;
-let blob;
+let blob: Blob;
 
 router.get('/neko', async (req, res) => {
     try {
-        response = (await neko.neko()).url;
-        blob = await (await fetch(response)).blob();
+        await neko.neko().then(async response => {
+            blob = await (await fetch(response.url)).blob();
+        });
     } catch {
         return res.status(500).json({ message: 'Fail fetching image' });
     }

@@ -32,7 +32,7 @@ router.post('/contact', async (req, res) => {
         ],
     };
 
-    const params = {
+    const body = {
         'username': 'Contact Form',
         'avatar_url': 'https://abysmal.eu.org/avatar.png',
         'embeds': [embed],
@@ -42,7 +42,7 @@ router.post('/contact', async (req, res) => {
         await fetch(webhook, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(params),
+            body: JSON.stringify(body),
         });
     } catch {
         return res.json({ success: false });

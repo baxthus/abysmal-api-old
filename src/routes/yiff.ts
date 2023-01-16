@@ -9,9 +9,9 @@ let blob;
 router.get('/yiff', (req, res) => res.redirect('/'));
 
 router.get('/yiff/:category', async (req, res) => {
-    const { category } = req.params;
+    const category = req.params.category.toLowerCase();
 
-    switch (category.toLowerCase()) {
+    switch (category) {
         case 'straight':
             response = await yiff.images.furry.yiff.straight();
             break;
