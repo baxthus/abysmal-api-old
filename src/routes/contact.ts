@@ -3,6 +3,13 @@ const router = Router();
 
 const webhook = process.env.CONTACT_WEBHOOK ?? '';
 
+type ContactType = {
+    originURL: string;
+    inputName: string;
+    inputEmail: string;
+    inputMessage: string;
+};
+
 router.post('/contact', async (req, res) => {
     if (!req.body.originURL ||
         !req.body.inputName ||
@@ -12,22 +19,24 @@ router.post('/contact', async (req, res) => {
         return res.json({ success: false });
     }
 
+    const content: ContactType = req.body;
+
     const embed = {
         'title': 'Contact Form',
-        'description': `From ${req.body.originURL}`,
+        'description': `From ${content.originURL} at <t:${Date.now()}:f>`,
         'color': 13346551,
         'fields': [
             {
                 'name': ':bust_in_silhouette: **Name**',
-                'value': '`' + req.body.inputName + '`',
+                'value': `\`${content.inputName}\``,
             },
             {
                 'name': ':envelope: **Email**',
-                'value': '`' + req.body.inputEmail + '`',
+                'value': `\`${content.inputEmail}\``,
             },
             {
                 'name': ':page_facing_up: **Message**',
-                'value': '```\n' + req.body.inputMessage + '\n```',
+                'value': `\`\`\`\n${content.inputMessage}\n\`\`\``,
             },
         ],
     };
