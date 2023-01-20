@@ -1,12 +1,14 @@
-FROM node:18
+FROM node:19
 
 WORKDIR /app
 
 COPY . .
 
-RUN yarn install
+RUN npm i -g pnpm
 
-RUN yarn build
+RUN pnpm install
+
+RUN pnpm run build
 
 EXPOSE 5000
 
