@@ -38,6 +38,10 @@ router.get('/yiff/:category', async (req, res) => {
     }
 
     res.type(blob.type);
+    res.set({
+        'artists': response.artists.join(', '),
+        'source': response.sources,
+    });
     blob.arrayBuffer().then(buf => res.send(Buffer.from(buf)));
 });
 
