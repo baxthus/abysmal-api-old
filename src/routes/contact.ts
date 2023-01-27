@@ -3,12 +3,12 @@ const router = Router();
 
 const webhook = process.env.CONTACT_WEBHOOK ?? '';
 
-type ContactType = {
-    originURL: string;
-    inputName: string;
-    inputEmail: string;
-    inputMessage: string;
-};
+interface IContact {
+    originURL: string
+    inputName: string
+    inputEmail: string
+    inputMessage: string
+}
 
 router.post('/contact', async (req, res) => {
     if (!req.body.originURL ||
@@ -19,7 +19,7 @@ router.post('/contact', async (req, res) => {
         return res.json({ success: false });
     }
 
-    const content: ContactType = req.body;
+    const content: IContact = req.body;
 
     const embed = {
         'title': 'Contact Form',

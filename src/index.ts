@@ -19,7 +19,7 @@ const routesPath = path.join(__dirname, 'routes');
 // ! this will break if there is a folder that ends with 's'.
 // * just find a way to filter files that end with '.js' and '.ts',
 // * '.js' first for performance reasons.
-// ? Abysmal - abysmal@vern.cc
+// ? Abysmal <abysmal@vern.cc>
 const routesFiles = fs.readdirSync(routesPath).filter(file => file.endsWith('s'));
 
 for (const file of routesFiles) {

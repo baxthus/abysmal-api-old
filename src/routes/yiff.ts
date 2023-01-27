@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import yiffy from 'yiffy';
+import yiffy, { JSONResponse } from 'yiffy';
 const router = Router();
 const yiff = new yiffy();
 
-let response;
-let blob;
+let response: JSONResponse;
+let blob: Blob;
 
 router.get('/yiff', (req, res) => res.redirect('/'));
 
@@ -39,8 +39,8 @@ router.get('/yiff/:category', async (req, res) => {
 
     res.type(blob.type);
     res.set({
+        'sources': response.sources.join(', '),
         'artists': response.artists.join(', '),
-        'source': response.sources,
     });
     blob.arrayBuffer().then(buf => res.send(Buffer.from(buf)));
 });

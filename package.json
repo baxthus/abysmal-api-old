@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "doppler run -- ts-node src/index.ts",
-    "dev": "doppler run -- ts-node-dev src/index.ts",
+    "start": "doppler run -- tsx src/index.ts",
+    "dev": "doppler run -- tsx watch src/index.ts",
     "build": "tsc && cp -r src/public dist",
     "start:prod": "npm run build && doppler run -- node dist/index.js",
     "pm2:prod": "npm run build && doppler run -- pm2 start dist/index.js",
@@ -20,9 +20,8 @@
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
     "eslint": "^8.31.0",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
     "tslib": "^2.4.1",
+    "tsx": "^3.12.2",
     "typescript": "^4.9.4",
     "typescript-eslint": "0.0.1-alpha.0"
   },

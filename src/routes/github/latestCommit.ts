@@ -1,26 +1,26 @@
 import { Request, Response } from 'express';
 
-type RequestType = {
-    user: string;
-    repo: string;
-    branch: string;
+interface IRequest {
+    user: string
+    repo: string
+    branch: string
 }
 
-type GithubType = {
-    ref: string;
-    node_id: string;
-    url: string;
+interface IGithub {
+    ref: string
+    node_id: string
+    url: string
     object: {
-        sha: string;
-        type: string;
-        url: string;
+        sha: string
+        type: string
+        url: string
     }
 }
 
 const latestCommit = async (req: Request, res: Response) => {
     if (!req.body.repo) return res.status(400).json({ success: false });
 
-    const content: RequestType = req.body;
+    const content: IRequest = req.body;
 
     if (!req.body.user) content.user = 'abysmal26';
     if (!req.body.branch) content.branch = 'main';
@@ -29,7 +29,7 @@ const latestCommit = async (req: Request, res: Response) => {
 
     if (response.status !== 200) return res.status(500).json({ success: false });
 
-    const responseJSON: GithubType = await response.json();
+    const responseJSON: IGithub = await response.json();
 
     const hash = responseJSON.object.sha.slice(0, 7);
 
