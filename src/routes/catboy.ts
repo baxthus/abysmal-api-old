@@ -3,13 +3,13 @@ import catboys from 'catboys';
 const router = Router();
 const catboy = new catboys();
 
-let result: catboys.CatboyImageResults;
+let content: catboys.CatboyImageResults;
 let blob: Blob;
 
 router.get('/catboy', async (req, res) => {
     try {
         await catboy.image().then(async response => {
-            result = response;
+            content = response;
             blob = await (await fetch(response.url)).blob();
         });
     } catch {
@@ -18,8 +18,8 @@ router.get('/catboy', async (req, res) => {
 
     res.type(blob.type);
     res.set({
-        'artist': result.artist,
-        'source': result.source_url,
+        'artist': content.artist,
+        'source': content.source_url,
     });
     blob.arrayBuffer().then(buf => res.send(Buffer.from(buf)));
 });

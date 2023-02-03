@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 
-interface IRequest {
+type RequestContent = {
     user: string
     repo: string
     branch: string
 }
 
-interface IGithub {
+type GithubResponse = {
     ref: string
     node_id: string
     url: string
@@ -20,7 +20,7 @@ interface IGithub {
 const latestCommit = async (req: Request, res: Response) => {
     if (!req.body.repo) return res.status(400).json({ success: false });
 
-    const content: IRequest = req.body;
+    const content: RequestContent = req.body;
 
     if (!req.body.user) content.user = 'abysmal26';
     if (!req.body.branch) content.branch = 'main';
@@ -29,9 +29,9 @@ const latestCommit = async (req: Request, res: Response) => {
 
     if (response.status !== 200) return res.status(500).json({ success: false });
 
-    const responseJSON: IGithub = await response.json();
+    const GhContent: GithubResponse = await response.json();
 
-    const hash = responseJSON.object.sha.slice(0, 7);
+    const hash = GhContent.object.sha.slice(0, 7);
 
     return res.json({ success: true, hash });
 };
