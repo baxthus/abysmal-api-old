@@ -14,13 +14,7 @@ app.get('/', (req, res) => {
 });
 
 const routesPath = path.join(__dirname, 'routes');
-// todo: find a better way to filter the files
-// ! this will break if there is a file that end with 's' and doesn't export a router.
-// ! this will break if there is a folder that ends with 's'.
-// * just find a way to filter files that end with '.js' and '.ts',
-// * '.js' first for performance reasons.
-// ? Abysmal <abysmal@vern.cc>
-const routesFiles = fs.readdirSync(routesPath).filter(file => file.endsWith('s'));
+const routesFiles = fs.readdirSync(routesPath).filter(file => file.endsWith('.js') || file.endsWith('.ts'));
 
 for (const file of routesFiles) {
     const filePath = path.join(routesPath, file);
